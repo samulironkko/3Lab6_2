@@ -30,7 +30,7 @@ public class FetchJSON extends Thread {
 
 
   public interface MyInterface {
-    void returnContent(ArrayList<ArrayList<String>> arrayLists);
+    void returnContent(ArrayList<ArrayList<Meal>> arrayLists);
   }
 
   public FetchJSON(MyInterface myInterface, String u, Context c) {
@@ -47,6 +47,40 @@ public class FetchJSON extends Thread {
       public void onResponse(JSONObject response) {
 
         try {
+
+          ArrayList<ArrayList<Meal>> arrayLists = new ArrayList<>();
+          ArrayList<Meal> mealArrayList = new ArrayList<>();
+          String titleName;
+          String name = "";
+          ArrayList<String> dietsList = new ArrayList<>();
+
+          JSONObject lunchMenu = response.getJSONObject("LunchMenu");
+          JSONArray setMenus = lunchMenu.getJSONArray("SetMenus");
+          for (int i = 0; i < setMenus.length(); i++) {
+            mealArrayList = new ArrayList<>();
+            JSONObject lunch = setMenus.getJSONObject(i);
+            titleName = lunch.getString("Name");
+
+            JSONArray meals = lunch.getJSONArray("Meals");
+            for (int a = 0; a < meals.length(); a++) {
+              JSONObject singleMeal = meals.getJSONObject(a);
+              name = singleMeal.getString("Name");
+
+              JSONArray diets = singleMeal.getJSONArray("Diets");
+              dietsList = new ArrayList<>();
+              for (int l = 0; l < diets.length(); l++) {
+                dietsList.add(l, diets.getString(l));
+              }
+              Meal meal = new Meal(titleName, name, dietsList);
+              mealArrayList.add(meal);
+            }
+            arrayLists.add(mealArrayList);
+          }
+
+          callBackInterface.returnContent(arrayLists);
+
+
+/*
           JSONObject lunchMenu = response.getJSONObject("LunchMenu");
           JSONArray setMenus = lunchMenu.getJSONArray("SetMenus");
           ArrayList<ArrayList<String>> aArrayList = new ArrayList<>();
@@ -61,7 +95,7 @@ public class FetchJSON extends Thread {
             aArrayList.add(singleMeals);
           }
           callBackInterface.returnContent(aArrayList);
-
+*/
         } catch (JSONException e) {
           e.printStackTrace();
         }
