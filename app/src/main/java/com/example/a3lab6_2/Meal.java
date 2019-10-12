@@ -1,8 +1,9 @@
 package com.example.a3lab6_2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Meal {
+public class Meal implements Serializable {
 
     String titleName;
     String name;

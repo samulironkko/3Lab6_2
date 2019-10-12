@@ -69,7 +69,7 @@ public class FetchJSON extends Thread {
               JSONArray diets = singleMeal.getJSONArray("Diets");
               dietsList = new ArrayList<>();
               for (int l = 0; l < diets.length(); l++) {
-                dietsList.add(l, diets.getString(l));
+                dietsList.add(diets.getString(l));
               }
               Meal meal = new Meal(titleName, name, dietsList);
               mealArrayList.add(meal);

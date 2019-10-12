@@ -3,6 +3,7 @@ package com.example.a3lab6_2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements FetchJSON.MyInter
     ListView listView;
     TextView dateTextView;
     FloatingActionButton myFab;
+    ArrayList<ArrayList<Meal>> mealArrayLists;
     int yearDate;
     int monthDate;
     int dayDate;
@@ -45,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements FetchJSON.MyInter
         setUrl();
 
         dateTextView = findViewById(R.id.dateTextView);
-
-
     }
 
 
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements FetchJSON.MyInter
         MainActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mealArrayLists = arrayLists;
                 listView.setAdapter(new ListAdapter(MainActivity.this, arrayLists));
                 dateTextView.setText(dayDate + "." + monthDate + "." + yearDate);
             }
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements FetchJSON.MyInter
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.i("click", "clicked" + position);
+        Intent intent = new Intent(this, SingleMealActivity.class);
+        intent.putExtra("MealList", mealArrayLists.get(position));
+        startActivity(intent);
 
     }
 

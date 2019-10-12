@@ -8,18 +8,15 @@
     tools:context=".SingleMealActivity">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/titleTextView"
-        android:textSize="30dp"
-        android:layout_margin="10dp"/>
+        android:id="@+id/singleTitle"
+        android:textSize="35dp"/>
 
-    <TextView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameTextView"
-        android:textSize="25dp"
+        android:layout_height="match_parent"
+        android:id="@+id/singleListView"
         android:layout_margin="10dp"/>
-
 
 </LinearLayout>
