@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/kotkanpoika"
+        android:title="Kotkanpoika" />
+    <item android:id="@+id/wallu"
+        android:title="Wallu"/>
+    <item android:id="@+id/alwari"
+        android:title="Alwari"/>
+    <item android:id="@+id/fasaani"
+        android:title="Fasaani"/>
+
+</menu>
